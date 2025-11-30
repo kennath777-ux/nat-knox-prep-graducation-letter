@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>致 Nathan — 12岁生日 & 毕业快乐</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #b3e5fc);
+      color: #2c3e50;
+      line-height: 1.6;
+      padding: 2rem;
+      margin: 0;
+      background-image: url('https://images.unsplash.com/photo-1505238687344-c2e94d19e66e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    h1 {
+      text-align: center;
+      color: #0277bd;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    .letter {
+      white-space: pre-line;
+      font-size: 1.1rem;
+    }
+    .signature {
+      text-align: right;
+      margin-top: 2rem;
+      font-style: italic;
+      color: #5d4037;
+    }
+    .ps {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #ccc;
+      font-size: 1rem;
+      color: #455a64;
+    }
+    .controls {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .controls button {
+      background: #0277bd;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      margin: 0 0.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .controls button:hover {
+      background: #01538a;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>致我们耿直又勇敢的 Nathan</h1>
+    <div class="letter" id="letterText">
+Our dear Nathan,
+Happy 12th birthday and congratulations on your Prep-school graduation! Here are the lines that we enjoy and hope it will brace you for the journey to come, and may you be young forever!
+
+Love you,  
+Mother and Father  
+
+如果提前了解，你们要面对的人生  
+不知你们是否，还会有勇气前来  
+看见的和听到的  
+经常会令你们沮丧  
+世俗是这样的强大  
+强大到生不出改变他们的念头来  
+可是如果有机会，提前了解了你们的人生  
+知道青春，也不过只有这些日子  
+不知你们是否，  
+还会在意那些世俗希望你们在意的事情  
+比如占有多少才更荣耀  
+拥有什么，才能被爱  
+
+等你们长大，  
+你们会因绿芽冒出土地而喜悦  
+会对初升的朝阳欢呼跳跃  
+也会给别人善意，和温暖  
+但是却会在赞美别的生命的同时  
+常常，甚至永远地，忘了自己的珍贵  
+
+愿你在被打击时，记起你的珍贵，抵抗恶意  
+愿你在迷茫时，坚信你的珍贵，爱你所爱，行你所行，听从你心  
+无问西东  
+
+If it is possible to know the life you will confront in advance,  
+Will you still have the courage to embrace it?  
+What you’ve seen and heard may often dispirit you.  
+The mundane world is so solid  
+That even the thought of making a difference seems impossible.  
+But if you were given the chance to know your life lying ahead,  
+Knowing that youth is just these days but nothing more than that,  
+Will you still —  
+Care about the things that this mundane world expects you to care?  
+Like one's glory depends on how much he or she possesses?  
+Like one must own something in order to be loved?  
+
+When you grow up,  
+You will feel the joy of the green sprout,  
+You will cheer for the rising sun,  
+You will also bring kindness and warmth to others.  
+However, while giving your praise to others,  
+You always forget how precious you are.  
+
+May you remember your preciousness to resist malice during hard times.  
+May you have infinite faith in your preciousness when you lose your way.  
+Love what you love, do what you do, and listen to your heart.  
+May you be young forever!
+    </div>
+    <div class="signature">
+      — 爱你的爸爸妈妈
+    </div>
+    <div class="ps">
+      P.S. Nat，你站在帆船上迎着海风的样子，和你笑起来的样子，都是我们见过最美的光。🌊⛵️
+    </div>
+
+    <div class="controls">
+      <button id="readBtn">朗读信件</button>
+      <button id="stopBtn">停止朗读</button>
+    </div>
+  </div>
+
+  <script>
+    const text = document.getElementById('letterText').innerText;
+    let isSpeaking = false;
+
+    document.getElementById('readBtn').addEventListener('click', () => {
+      if (isSpeaking) return;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'zh-CN'; // 优先中文朗读，浏览器会自动处理中英文混合
+      utterance.rate = 0.9;     // 语速稍慢，更温情
+      utterance.pitch = 1.0;
+
+      utterance.onstart = () => { isSpeaking = true; };
+      utterance.onend = () => { isSpeaking = false; };
+
+      speechSynthesis.speak(utterance);
+    });
+
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      speechSynthesis.cancel();
+      isSpeaking = false;
+    });
+  </script>
+</body>
+</html>
