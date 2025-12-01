@@ -65,6 +65,23 @@
     .controls button:hover {
       background: #01538a;
     }
+    .audio-player {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .audio-instruction {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #0277bd;
+      font-weight: bold;
+      font-size: 1.1rem;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
     @media (max-width: 600px) {
       .container {
         padding: 1.5rem;
@@ -72,21 +89,10 @@
       h1 {
         font-size: 1.4rem;
       }
+      .audio-instruction {
+        font-size: 1rem;
+      }
     }
-  .photo {
-    display: block;
-    width: 500px;
-    height: auto;
-    border-radius: 12px;
-    margin: 0 auto 1.5rem auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border: 3px solid #ffffff;
-  }
-@media (max-width: 600px) {
-  .photo {
-    width: 120px;
-  }
-}
   </style>
 </head>
 <body>
@@ -165,6 +171,10 @@ May you be young forever!
       P.S. Nat，你站在帆船上迎着海风的样子，和你笑起来的样子，都是我们见过最美的光。🌊⛵️
     </div>
 
+    <div class="audio-instruction">
+      🎧 Click to play 点击播放中文 👇
+    </div>
+    
     <div class="audio-player">
       <audio id="audioPlayer" controls>
         <source src="Nat.m4a" type="audio/mp4">
